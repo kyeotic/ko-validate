@@ -27,6 +27,10 @@ This will use the default validation method, `value !== undefined && value !== n
 
 Will use the default validation method, and show the specified error.
 
+####Regex
+`this.title = ko.observable().extend({ isValid: { validate: /^Home/}, message: 'must start with "Home"' });`
+
+You can pass a regex to either the `validate` property, or to `isValid` (if you don't need to specify a message).
 ####Standard options
 `this.title = ko.observable().extend({ isValid: { validate: { min: 2}, message: 'must be at least 2' });`
 
