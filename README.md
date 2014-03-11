@@ -62,7 +62,7 @@ this.title = ko.observable()
         });
 ```
 
-If you pass a function to `validate` it will be used to test the validity of the observable. The function will recieve any value written, and the value will be invalid if the function returns `false`.
+If you pass a function to `validate` it will be used to test the validity of the observable. The function will recieve any value written, and the value will be invalid if the function returns `false`. If the custom function access any observables, it will establish a dependency and re-run when those observables change.
 
 ####Multiple validations
 ```javascript
