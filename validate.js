@@ -113,16 +113,17 @@ ko.extenders.isValid = function (target, validator) {
 
   //Just activate whatever observable is given to us on first blur
 ko.bindingHandlers.validate = {
+    preprocess: function (value, name, addBinding) {
+        addBinding('value', value);
+    },
     init: function (element, valueAccessor) {
         if (!ko.isObservable(valueAccessor()))
             throw new Error("The validate binding cannot be used with non-observables.");
 
-        ko.bindingHandlers.value.init.apply(this, arguments); //Wrap value init
-
         //Starting the input with validation errors is bad
         //We will activate the validation after the user has done something
         //Select's get change raised when OPTIONS are bound, which is very common
-            //We don't want that to activate validation
+        //We don't want that to activate validation
         if (element.nodeName.toLowerCase() === "select") {
             valueAccessor().__selectInit = false;
         }
@@ -141,6 +142,5 @@ ko.bindingHandlers.validate = {
             else
                 valueAccessor().isModified(true);
         }
-        ko.bindingHandlers.value.update.apply(this, arguments); //just wrap the update binding handler
     }
 };
