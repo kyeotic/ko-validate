@@ -115,6 +115,7 @@ ko.extenders.isValid = function (target, validator) {
 ko.bindingHandlers.validate = {
     preprocess: function (value, name, addBinding) {
         addBinding('value', value);
+        return value;
     },
     init: function (element, valueAccessor) {
         if (!ko.isObservable(valueAccessor()))
